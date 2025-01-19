@@ -70,6 +70,12 @@ export class MainEmployeeViewComponent {
     });
   }
 */
+  trackById(index: number, item: any): number {
+    return item.id;
+  }
+
+
+
   NavigationCreateEmployee() {
     this.router.navigate(['/create-employee-view'])
   }
