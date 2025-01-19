@@ -20,6 +20,13 @@ export class HttpService {
       );
   }
 
+  postData(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/data`, data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // Fehlerbehandlungsmethode
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
