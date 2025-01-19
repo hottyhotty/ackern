@@ -10,6 +10,7 @@ import { UpdateEmployeeViewComponent } from './components/update-employee-view/u
 import { MainEmployeeViewComponent } from './components/main-employee-view/main-employee-view.component';
 import { DeleteEmployeePopupComponent } from './components/delete-employee-popup/delete-employee-popup.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +19,7 @@ import { DeleteEmployeePopupComponent } from './components/delete-employee-popup
     UpdateEmployeeViewComponent,
     MainEmployeeViewComponent,
     DeleteEmployeePopupComponent
+
   ],
   imports: [
     BrowserModule,
