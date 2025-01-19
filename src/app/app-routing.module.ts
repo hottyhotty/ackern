@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import{EmployeeListComponent} from "./employee-list/employee-list.component";
 import {MainEmployeeViewComponent} from "./components/main-employee-view/main-employee-view.component";
 import {CreateEmployeeViewComponent} from "./components/create-employee-view/create-employee-view.component";
 import {UpdateEmployeeViewComponent} from "./components/update-employee-view/update-employee-view.component";
