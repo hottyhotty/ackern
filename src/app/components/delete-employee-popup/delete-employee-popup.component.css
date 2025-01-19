@@ -1,0 +1,34 @@
+.button-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.cancel-button {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+.delete-button {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.delete-text{
+  color: #ffffff;
+}
+
+.overview-text{
+  font-size: 18px;
+  text-align: center;
+
+}
+.spacer{
+  height: 30px;
+}
+.smaller{
+
+
+}
