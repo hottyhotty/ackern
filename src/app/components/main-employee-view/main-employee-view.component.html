@@ -19,13 +19,11 @@
       </tr>
       </thead>
       <tbody>
-        @for(s of editShow; track s.id){
-          <tr (click)="NavigationEmployeeDetails(s)">
-            <td >{{s.firstName}}</td>
-            <td>{{s.lastName}}</td>
-            <td>{{s.city}}</td>
-          </tr>
-        }
+      <tr *ngFor="let s of editShow; trackBy: trackById" (click)="NavigationEmployeeDetails(s)">
+        <td>{{ s.firstName }}</td>
+        <td>{{ s.lastName }}</td>
+        <td>{{ s.city }}</td>
+      </tr>
 
       </tbody>
     </table>
