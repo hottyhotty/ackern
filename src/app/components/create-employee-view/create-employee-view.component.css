@@ -1,0 +1,17 @@
+.Window {
+  border: #373636 solid 1px;
+  margin: 100px 100px;
+  margin-top:20px;
+  padding: 20px 40px;
+}
+.button-spacing {
+  margin-right: 79.5%;
+}
+h1{
+  margin-top:40px;
+  text-align: center;
+}
+
+.button-space{
+  margin-right: 79%;
+}
