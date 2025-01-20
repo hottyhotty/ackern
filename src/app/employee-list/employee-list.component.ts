@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, of} from "rxjs";
-import {Employee} from "../Employee";
+import { EmployeeModel } from '../Model/EmployeeModel';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
@@ -10,7 +10,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class EmployeeListComponent {
 
-  employees$: Observable<Employee[]>;
+  employees$: Observable<EmployeeModel[]>;
 
   constructor(private http: HttpClient) {
     this.employees$ = of([]);
@@ -18,7 +18,7 @@ export class EmployeeListComponent {
   }
 
   fetchData() {
-    this.employees$ = this.http.get<Employee[]>('/backend', {
+    this.employees$ = this.http.get<EmployeeModel[]>('/backend', {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
     });
