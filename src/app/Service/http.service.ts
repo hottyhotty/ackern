@@ -9,83 +9,37 @@ import { EmployeeModel } from '../Model/EmployeeModel';
 })
 export class HttpService {
 
-  private apiUrl = 'http://localhost:4200/main-employee-view';
-  private test = 'http://localhost:8089';
+  private apiURL = 'http://localhost:8089/employees/';
 
   constructor(private http: HttpClient) { }
-
-/*  getData(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/data`)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }*/
-
-  putData(data: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/data`, data)
+  
+  getAllEmployees(): Observable<EmployeeModel[]> {
+    return this.http.get<EmployeeModel[]>(`${this.apiURL}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  postData(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/data`, data)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getEmployee(id: number): Observable<EmployeeModel> {
-    return this.http.get<EmployeeModel>(`${this.test}${id}`)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getEmployees(lastName: string): Observable<EmployeeModel[]> {
-    return this.http.get<EmployeeModel[]>(`${this.test}${lastName}`)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getEmployeeFirstName(firstName: string): Observable<EmployeeModel[]> {
-    return this.http.get<EmployeeModel[]>(`${this.test}${firstName}`)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getEmployeeStreet(street: string): Observable<EmployeeModel[]> {
-    return this.http.get<EmployeeModel[]>(`${this.test}`)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  getEmployeeCity(city: string): Observable<EmployeeModel[]> {
-    return this.http.get<EmployeeModel[]>(`${this.test}${city}`)
-      .pipe(
-        catchError(this.handleError)
-      );
+  saveEmployee(Data: any) {
+    return this.http.post(this.apiURL, Data);
   }
 
   updateEmployee(employee: EmployeeModel): Observable<EmployeeModel> {
-    return this.http.put<EmployeeModel>(`${this.apiUrl}/main-employee-view/${employee.id}, ${employee.lastName}, ${employee.firstName}, ${employee.city}`, employee)
+    return this.http.put<EmployeeModel>(`${this.apiURL}${employee.id}, ${employee.lastName}, ${employee.firstName}, ${employee.city}`, employee)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  deleteEmployee(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/employees/${id}`)
+  deleteEmployeeByID(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiURL}${id}`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   createEmployee(employee: EmployeeModel): Observable<EmployeeModel> {
-    return this.http.post<EmployeeModel>(`${this.apiUrl}/employees`, employee)
+    return this.http.post<EmployeeModel>(`${this.apiURL}`, employee)
       .pipe(
         catchError(this.handleError)
       );
