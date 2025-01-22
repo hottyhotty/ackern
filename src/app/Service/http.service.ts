@@ -20,12 +20,19 @@ export class HttpService {
       );
   }
 
+  getEmployeeByID(id: number): Observable<EmployeeModel> {
+    return this.http.get<EmployeeModel>(`${this.apiURL}${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   saveEmployee(Data: any) {
     return this.http.post(this.apiURL, Data);
   }
 
   updateEmployee(employee: EmployeeModel): Observable<EmployeeModel> {
-    return this.http.put<EmployeeModel>(`${this.apiURL}${employee.id}, ${employee.lastName}, ${employee.firstName}, ${employee.city}`, employee)
+    return this.http.put<EmployeeModel>(`${this.apiURL}${employee.id}, ${employee.lastName}, ${employee.firstName}, ${employee.street}, ${employee.postcode}, ${employee.city}, ${employee.phone}`, employee)
       .pipe(
         catchError(this.handleError)
       );

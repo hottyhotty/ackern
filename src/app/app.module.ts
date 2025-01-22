@@ -9,6 +9,7 @@ import { CreateEmployeeViewComponent } from './components/create-employee-view/c
 import { UpdateEmployeeViewComponent } from './components/update-employee-view/update-employee-view.component';
 import { MainEmployeeViewComponent } from './components/main-employee-view/main-employee-view.component';
 import { DeleteEmployeePopupComponent } from './components/delete-employee-popup/delete-employee-popup.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DeleteEmployeePopupComponent } from './components/delete-employee-popup
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

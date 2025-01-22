@@ -19,6 +19,8 @@ export class DeleteEmployeePopupComponent {
 
   EmployeeModel: EmployeeModel[] = [];
 
+
+
   deleteEmployee() {
     this.httpService.deleteEmployeeByID(this.data.id).subscribe((data) => {
       this.dialogRef.close(true);
