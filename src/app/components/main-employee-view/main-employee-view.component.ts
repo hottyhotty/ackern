@@ -25,7 +25,7 @@ export class MainEmployeeViewComponent implements OnInit {
     console.log('MainEmployeeViewComponent initialized');
   }
 
-  trackById(index: number, item: any): number {
+  trackById(index: number, item: EmployeeModel): number {
 
     return item.id;
 
@@ -35,7 +35,7 @@ export class MainEmployeeViewComponent implements OnInit {
     this.router.navigate(['/create-employee-view'])
   }
 
-  NavigationEmployeeDetails(s: EmployeeModel) {
-    this.router.navigate(['/update-employee-view'])
+  NavigationEmployeeDetails(employee: EmployeeModel) {
+    this.router.navigate(['/update-employee-view', employee])
   }
 }

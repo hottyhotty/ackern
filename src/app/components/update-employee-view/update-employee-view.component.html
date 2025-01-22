@@ -8,31 +8,31 @@
 <div class="Window">
   <div class="mb-3">
     <label for="formGroupExampleInput" class="form-label">Vorname</label>
-    <input type="text" class="form-control" id="formGroupExampleInput">
+    <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName">
   </div>
   <div class="mb-3">
     <label for="formGroupExampleInput2" class="form-label">Nachname</label>
-    <input type="text" class="form-control" id="formGroupExampleInput2">
+    <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName">
   </div>
   <div class="mb-3">
     <label for="formGroupExampleInput2" class="form-label">Straße</label>
-    <input type="text" class="form-control" id="formGroupExampleInput3">
+    <input type="text" class="form-control" id="street" [(ngModel)]="employee.street">
   </div>
   <div class="mb-3">
     <label for="formGroupExampleInput2" class="form-label">Postleitzahl</label>
-    <input type="text" class="form-control" id="formGroupExampleInput4">
+    <input type="text" class="form-control" id="postcode" [(ngModel)]="employee.postcode">
   </div>
   <div class="mb-3">
     <label for="formGroupExampleInput2" class="form-label">Stadt</label>
-    <input type="text" class="form-control" id="formGroupExampleInput5">
+    <input type="text" class="form-control" id="city" [(ngModel)]="employee.city">
   </div>
   <div class="mb-3">
     <label for="formGroupExampleInput2" class="form-label">Telefonnummer</label>
-    <input type="text" class="form-control" id="formGroupExampleInput6">
+    <input type="text" class="form-control" id="phone" [(ngModel)]="employee.phone">
   </div>
   <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationBack()">Abbrechen</button>
   <button type="button" class="btn btn-secondary btn-lg button-spacing">Löschen</button>
-  <button type="button" class="btn btn-secondary btn-lg">Speichern</button>
+  <button type="button" class="btn btn-secondary btn-lg" (click)="NavigationForward()">Speichern</button>
 </div>
 </body>
 </html>
