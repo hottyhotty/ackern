@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from "@angular/router";
+import { Observable } from 'rxjs';
 import { EmployeeModel } from 'src/app/Model/EmployeeModel';
 import { HttpService } from 'src/app/Service/http.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-update-employee-view',
@@ -9,6 +11,7 @@ import { HttpService } from 'src/app/Service/http.service';
   styleUrls: ['./update-employee-view.component.css']
 })
 export class UpdateEmployeeViewComponent implements OnInit {
+  
   employee: EmployeeModel = {
     id: 0,
     lastName: '',
@@ -20,18 +23,31 @@ export class UpdateEmployeeViewComponent implements OnInit {
   };
 
   constructor(private router: Router, private route: ActivatedRoute, private httpService: HttpService) { }
-  
-  SaveEmployee() {
-    this.httpService.createEmployee(this.employee).subscribe((data: any) => {
+
+
+  async UpdateEmployee() {
+    try {
+      const data = await firstValueFrom(this.httpService.updateEmployee(this.employee));
+      console.log('Employee updated: ', data);
+      this.router.navigate(['/main-employee-view']);
+    } catch (error) {
+      console.log('Error while updating Employee: ', error);
+    }
+  }
+
+  async SaveEmployee() {
+    try {
+      const data = await firstValueFrom(this.httpService.createEmployee(this.employee));
       console.log('Employee saved: ', data);
       this.router.navigate(['/main-employee-view']);
-    });
+    } catch (error) {
+      console.log('Error while saving Employee: ', error);
+    }
   }
 
   ngOnInit(): void {
-    this.SaveEmployee();
     this.route.params.subscribe(params => {
-      this.employee = params as EmployeeModel;
+      this.employee = { ...params } as EmployeeModel;
     });
   }
 
@@ -43,8 +59,10 @@ export class UpdateEmployeeViewComponent implements OnInit {
     this.router.navigate(['/delete-employee-popup'])
   }
 
-  NavigationForward() {
+  NavigationSaveEmployee() {
+    this.UpdateEmployee();
     this.SaveEmployee();
     this.router.navigate(['/main-employee-view']);
   }
 }
+

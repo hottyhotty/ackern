@@ -32,7 +32,6 @@ export class CreateEmployeeViewComponent implements OnInit {
   CreateEmployee() {
     this.httpService.updateEmployee(this.newEmployee).subscribe((data) => {
       console.log('Employee created: ', data);
-      this.router.navigate(['/main-employee-view']);
     }, error => {
       console.log('Error while creating Employee: ', error);
     });
@@ -41,7 +40,6 @@ export class CreateEmployeeViewComponent implements OnInit {
   SaveEmployee() {
     this.httpService.createEmployee(this.newEmployee).subscribe((data) => {
       console.log('Employee saved: ', data);
-      this.router.navigate(['/main-employee-view']);
     });
   }
 
