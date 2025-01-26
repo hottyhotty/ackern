@@ -8,7 +8,7 @@ import { HttpService } from "../../Service/http.service";
   templateUrl: './main-employee-view.component.html',
   styleUrls: ['./main-employee-view.component.css']
 })
-
+  
 export class MainEmployeeViewComponent implements OnInit {
   EmployeeModel: EmployeeModel[] = [];
 

@@ -11,6 +11,12 @@ import { EmployeeModel } from '../../Model/EmployeeModel';
 export class CreateEmployeeViewComponent implements OnInit {
   constructor(private router: Router, private httpService: HttpService) { }
 
+  ngOnInit(): void {
+    // Initialize the component, for example, fetch data from a service
+    this.generateNewId();
+    console.log('MainEmployeeViewComponent initialized');
+  }
+
   newEmployee: EmployeeModel = {
     id: 0,
     lastName: '',
@@ -30,28 +36,20 @@ export class CreateEmployeeViewComponent implements OnInit {
     });
   }
 
-  /*
-  CreateEmployee() {
-    this.httpService.updateEmployee(this.newEmployee).subscribe((data) => {
-      console.log('Employee created: ', data);
-    }, error => {
-      console.log('Error while creating Employee: ', error);
-    });
-  }
-*/
+
   SaveEmployee() {
-    this.newEmployee
-    this.httpService.createEmployee(this.newEmployee).subscribe((data) => {
-      console.log('Employee saved: ', data);
+    this.httpService.createEmployee(this.newEmployee).subscribe({
+      next: (data) => {
+        console.log('Employee saved: ', data);
+        alert('Employee saved successfully!'); // Erfolgsmeldung
+      },
+      error: (error) => {
+        console.error('Error saving employee: ', error);
+        alert('Error saving employee: ' + error.message); // Fehlermeldung
+      }
     });
   }
 
-  ngOnInit(): void {
-    // Initialize the component, for example, fetch data from a service
-    //this.generateNewId();
-
-    console.log('MainEmployeeViewComponent initialized');
-  }
 
   NavigationBack() {
     this.router.navigate(['/main-employee-view'])

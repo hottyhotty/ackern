@@ -28,8 +28,6 @@ export class HttpService {
   }
 
   updateEmployee(employee: EmployeeModel): Observable<EmployeeModel> {
-
-
     return this.http.put<EmployeeModel>(`${this.apiURL}${employee.id}`, employee)
       .pipe(
         catchError(this.handleError)
@@ -43,6 +41,8 @@ export class HttpService {
       );
   };
 
+
+
   deleteEmployeeByID(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiURL}${id}`)
       .pipe(
@@ -51,12 +51,15 @@ export class HttpService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Unknown error!';
+    console.error('An error occurred:', error); // Logge den Fehler
+    let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
+      // Client-seitiger Fehler
       errorMessage = `Error: ${error.error.message}`;
     } else {
+      // Server-seitiger Fehler
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    return throwError(errorMessage);
+    return throwError(() => new Error(errorMessage)); // Werfe den Fehler weiter
   }
 }
