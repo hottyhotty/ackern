@@ -27,12 +27,12 @@ export class DeleteEmployeePopupComponent {
       const data = await firstValueFrom(this.httpService.deleteEmployeeByID(this.data.id));
       this.dialogRef.close(true);
       this.router.navigate(['/main-employee-view']);
-      
+
     } catch (error) {
       console.log('Error while deleting Employee: ', error);
     }
   }
-    
+
   ngOnInit(): void {
     // Initialize the component, for example, fetch data from a service
     console.log('MainEmployeeViewComponent initialized');
@@ -58,6 +58,7 @@ export class DeleteEmployeePopupComponent {
   deleteEmployee() {
     this.router.navigate(['/main-employee-view'])
   }
+
 }
 function inject(MAT_DIALOG_DATA: InjectionToken<any>): (target: typeof DeleteEmployeePopupComponent, propertyKey: undefined, parameterIndex: 1) => void {
   throw new Error('Function not implemented.');

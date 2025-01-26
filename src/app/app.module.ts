@@ -17,7 +17,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeListComponent,
     CreateEmployeeViewComponent,
     UpdateEmployeeViewComponent,
     MainEmployeeViewComponent,
@@ -30,7 +29,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
