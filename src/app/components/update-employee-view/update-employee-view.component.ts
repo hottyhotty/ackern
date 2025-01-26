@@ -72,7 +72,6 @@ async UpdateEmployee() {
 
   NavigationSaveEmployee() {
     this.UpdateEmployee();
-    this.SaveEmployee();
     this.router.navigate(['/main-employee-view']);
   }
 }
