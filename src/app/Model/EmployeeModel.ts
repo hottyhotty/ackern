@@ -1,3 +1,8 @@
+export interface Skill {
+  skill: string
+  id: number
+}
+
 export interface EmployeeModel {
   id: number
   lastName: string
@@ -6,5 +11,6 @@ export interface EmployeeModel {
   postcode: string
   city: string
   phone: string
+  skillSet: Skill[]
 }
 

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeModel } from 'src/app/Model/EmployeeModel';
 import { HttpService } from 'src/app/Service/http.service';
-import { firstValueFrom } from 'rxjs';
+import {firstValueFrom, lastValueFrom} from 'rxjs';
 import { DeleteEmployeePopupComponent } from '../delete-employee-popup/delete-employee-popup.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { DeleteEmployeePopupComponent } from '../delete-employee-popup/delete-em
   styleUrls: ['./update-employee-view.component.css']
 })
 export class UpdateEmployeeViewComponent implements OnInit {
-  
+
   employee: EmployeeModel = {
     id: 0,
     lastName: '',
@@ -20,25 +20,26 @@ export class UpdateEmployeeViewComponent implements OnInit {
     street: '',
     postcode: '',
     city: '',
-    phone: ''
+    phone: '',
+    skillSet: []
   };
 
   constructor(private router: Router, private route: ActivatedRoute, private httpService: HttpService, private dialog: MatDialog) { }
 
 
-  async UpdateEmployee() {
-    try {
-      const data = await firstValueFrom(this.httpService.updateEmployee(this.employee));
-      console.log('Employee updated: ', data);
-      this.router.navigate(['/main-employee-view']);
-    } catch (error) {
-      console.log('Error while updating Employee: ', error);
-    }
+async UpdateEmployee() {
+  try {
+    const data = await lastValueFrom(this.httpService.updateEmployee(this.employee));
+    console.log('Employee updated: ', data);
+    this.router.navigate(['/main-employee-view']);
+  } catch (error) {
+    console.log('Error while updating Employee: ', error);
   }
+}
 
   async SaveEmployee() {
     try {
-      const data = await firstValueFrom(this.httpService.createEmployee(this.employee));
+      const data = await this.httpService.createEmployee(this.employee);
       console.log('Employee saved: ', data);
       this.router.navigate(['/main-employee-view']);
     } catch (error) {

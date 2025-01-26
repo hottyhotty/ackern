@@ -6,35 +6,33 @@
 <body>
 <h1>Mitarbeiter bearbeiten</h1>
 <div class="Window">
-  <form (ngSubmit)="UpdateEmployee()">
   <div class="mb-3">
-    <label for="formGroupExampleInput" class="form-label">Vorname</label>
+    <label for="firstName" class="form-label">Vorname</label>
     <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName">
   </div>
   <div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label">Nachname</label>
+    <label for="lastName" class="form-label">Nachname</label>
     <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName">
   </div>
   <div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label">Straße</label>
+    <label for="street" class="form-label">Straße</label>
     <input type="text" class="form-control" id="street" [(ngModel)]="employee.street" name="street">
   </div>
   <div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label">Postleitzahl</label>
+    <label for="postcode" class="form-label">Postleitzahl</label>
     <input type="text" class="form-control" id="postcode" [(ngModel)]="employee.postcode" name="postcode">
   </div>
   <div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label">Stadt</label>
+    <label for="city" class="form-label">Stadt</label>
     <input type="text" class="form-control" id="city" [(ngModel)]="employee.city" name="city" required>
   </div>
   <div class="mb-3">
-    <label for="formGroupExampleInput2" class="form-label">Telefonnummer</label>
+    <label for="phone" class="form-label">Telefonnummer</label>
     <input type="text" class="form-control" id="phone" [(ngModel)]="employee.phone" name="phone">
   </div>
   <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationBack()">Abbrechen</button>
   <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationDeleteEmployee()">Löschen</button>
   <button type="button" class="btn btn-secondary btn-lg" (click)="NavigationSaveEmployee()">Speichern</button>
-</form>
 </div>
 </body>
 </html>
