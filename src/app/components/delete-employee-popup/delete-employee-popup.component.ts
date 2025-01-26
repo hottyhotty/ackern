@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpService } from "../../Service/http.service";
 import { EmployeeModel } from "../../Model/EmployeeModel";
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-delete-employee-popup',
@@ -21,24 +22,29 @@ export class DeleteEmployeePopupComponent {
 
 
 
-  deleteEmployee() {
-    this.httpService.deleteEmployeeByID(this.data.id).subscribe((data) => {
+  async deleteEmployee() {
+    try {
+      const data = await firstValueFrom(this.httpService.deleteEmployeeByID(this.data.id));
       this.dialogRef.close(true);
       this.router.navigate(['/main-employee-view']);
       
-    }, error => {
+    } catch (error) {
       console.log('Error while deleting Employee: ', error);
-    });
+    }
   }
     
   ngOnInit(): void {
     // Initialize the component, for example, fetch data from a service
-    this.deleteEmployee();
     console.log('MainEmployeeViewComponent initialized');
   }
 
   closeDialog() {
     this.dialogRef.close(false);
+  }
+
+  NavigationForward() {
+    this.deleteEmployee();
+    this.router.navigate(['/main-employee-view'])
   }
 }
   /*openDialog(){

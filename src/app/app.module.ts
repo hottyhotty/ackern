@@ -1,5 +1,6 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from "@angular/common/http";
 import { HttpService } from './Service/http.service';
@@ -10,6 +11,7 @@ import { UpdateEmployeeViewComponent } from './components/update-employee-view/u
 import { MainEmployeeViewComponent } from './components/main-employee-view/main-employee-view.component';
 import { DeleteEmployeePopupComponent } from './components/delete-employee-popup/delete-employee-popup.component';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { FormsModule } from '@angular/forms';
 
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from "@angular/router";
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from "@angular/router";
+import { MatDialog } from '@angular/material/dialog';
 import { EmployeeModel } from 'src/app/Model/EmployeeModel';
 import { HttpService } from 'src/app/Service/http.service';
 import { firstValueFrom } from 'rxjs';
+import { DeleteEmployeePopupComponent } from '../delete-employee-popup/delete-employee-popup.component';
 
 @Component({
   selector: 'app-update-employee-view',
@@ -22,7 +23,7 @@ export class UpdateEmployeeViewComponent implements OnInit {
     phone: ''
   };
 
-  constructor(private router: Router, private route: ActivatedRoute, private httpService: HttpService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private httpService: HttpService, private dialog: MatDialog) { }
 
 
   async UpdateEmployee() {
@@ -56,7 +57,16 @@ export class UpdateEmployeeViewComponent implements OnInit {
   }
 
   NavigationDeleteEmployee() {
-    this.router.navigate(['/delete-employee-popup'])
+    const dialogRef = this.dialog.open(DeleteEmployeePopupComponent, {
+      data: { id: this.employee.id }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(`Dialog result: ${result}`);
+        this.router.navigate(['/main-employee-view']);
+      }
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   NavigationSaveEmployee() {
