@@ -1,86 +1,41 @@
-import { Component } from '@angular/core';
-import {Router} from "@angular/router";
-import {EmployeeModel} from "../../Model/EmployeeModel";
+import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { EmployeeModel } from "../../Model/EmployeeModel";
+import { HttpService } from "../../Service/http.service";
 
 @Component({
   selector: 'app-main-employee-view',
   templateUrl: './main-employee-view.component.html',
   styleUrls: ['./main-employee-view.component.css']
 })
-export class MainEmployeeViewComponent {
-  editShow : EmployeeModel[] = [
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},{id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
-    {id:2,city:"Arab states",firstName:"Jamal",lastName:"Nahadi",phone:"+072894938",postcode:"Somewhere", street:"Anywhere"},
 
+export class MainEmployeeViewComponent implements OnInit {
+  EmployeeModel: EmployeeModel[] = [];
 
-
-  ];
-
-
-  constructor(private router: Router) {}
-
-
-
-  showDetails(Employee: EmployeeModel){ console.log("hallo, hier bin ich ");   }
-
-
-
-
-  /*
-  constructor(private dialog: MatDialog) {}
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DeleteEmployeePopupComponent, {
-      width: '450px',
-      height:'150px',
-      data: { message: 'Hello World' },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Result:', result);
+  loadEmployee() {
+    this.httpService.getAllEmployees().subscribe((data) => {
+      this.EmployeeModel = data;
     });
   }
-*/
-  trackById(index: number, item: any): number {
+
+  constructor(private router: Router, private httpService: HttpService) { }
+  ngOnInit(): void {
+    // Initialize the component, for example, fetch data from a service
+    this.loadEmployee();
+    console.log('MainEmployeeViewComponent initialized');
+  }
+
+  trackById(index: number, item: EmployeeModel): number {
+
     return item.id;
+
   }
-
-
 
   NavigationCreateEmployee() {
     this.router.navigate(['/create-employee-view'])
   }
 
-  NavigationEmployeeDetails(s: EmployeeModel) {
-    this.router.navigate(['/update-employee-view'])
+  NavigationEmployeeDetails(employee: EmployeeModel) {
+    this.router.navigate(['/update-employee-view', employee])
   }
 }

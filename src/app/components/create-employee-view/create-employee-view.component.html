@@ -6,9 +6,10 @@
 <body>
 <h1>Mitarbeiter hinzufügen</h1>
 <div class="Window">
+  <form >
   <div class="mb-3">
     <label for="formGroupExampleInput" class="form-label">Vorname</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Bitte geben Sie den Vornamen ein">
+    <input type="text" class="form-control" id="firstName" [(ngModel)]="newEmployee.firstName" name="firstName" placeholder="Bitte geben Sie den Vornamen ein">
   </div>
   <div class="mb-3">
     <label for="formGroupExampleInput2" class="form-label">Nachname</label>
@@ -32,6 +33,7 @@
   </div>
   <button type="button" class="btn btn-secondary btn-lg button-space" (click)="NavigationBack()">Abbrechen</button>
   <button type="button" class="btn btn-secondary btn-lg">Speichern</button>
+  </form>
 </div>
 </body>
 </html>
