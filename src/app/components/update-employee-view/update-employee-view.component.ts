@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 })
 export class UpdateEmployeeViewComponent {
   constructor(private router: Router) {}
+
+
   NavigationBack() {
     this.router.navigate(['/main-employee-view'])
   }
