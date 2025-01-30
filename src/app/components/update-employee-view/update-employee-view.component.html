@@ -9,31 +9,31 @@
   <form (ngSubmit)="onSubmit(employeeForm)" #employeeForm="ngForm">
     <div class="mb-3">
       <label for="firstName" class="form-label">Vorname</label>
-      <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName" required>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName" [readonly]="isReadOnly" required>
     </div>
   <div class="mb-3">
     <label for="lastName" class="form-label">Nachname</label>
-    <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName" required>
+    <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName"  [readonly]="isReadOnly" required>
   </div>
   <div class="mb-3">
     <label for="street" class="form-label">Straße</label>
-    <input type="text" class="form-control" id="street" [(ngModel)]="employee.street" name="street" required>
+    <input type="text" class="form-control" id="street" [(ngModel)]="employee.street" name="street" [readonly]="isReadOnly" required>
   </div>
   <div class="mb-3">
     <label for="postcode" class="form-label">Postleitzahl</label>
-    <input type="text" class="form-control" id="postcode" [(ngModel)]="employee.postcode" name="postcode" required pattern="\d{5}">
+    <input type="text" class="form-control" id="postcode" [(ngModel)]="employee.postcode" name="postcode" [readonly]="isReadOnly" required pattern="\d{5}">
   </div>
   <div class="mb-3">
     <label for="city" class="form-label">Stadt</label>
-    <input type="text" class="form-control" id="city" [(ngModel)]="employee.city" name="city" required>
+    <input type="text" class="form-control" id="city" [(ngModel)]="employee.city" name="city" [readonly]="isReadOnly" required>
   </div>
   <div class="mb-3">
     <label for="phone" class="form-label">Telefonnummer</label>
-    <input type="text" class="form-control" id="phone" [(ngModel)]="employee.phone" name="phone" required pattern="[0-9+/]+">
+    <input type="text" class="form-control" id="phone" [(ngModel)]="employee.phone" name="phone" [readonly]="isReadOnly" required pattern="[0-9+/]+">
   </div>
   <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationBack()">Abbrechen</button>
   <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationDeleteEmployee()">Löschen</button>
-  <button type="submit" class="btn btn-secondary btn-lg" [disabled]="!employeeForm.form.valid">Speichern</button>
+  <button type="submit" class="btn btn-secondary btn-lg" [disabled]="!employeeForm.form.valid">{{isReadOnly ? 'Bearbeiten' : 'Speichern' }}</button>
 </form>
 </div>
 </body>

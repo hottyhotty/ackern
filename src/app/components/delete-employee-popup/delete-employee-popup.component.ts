@@ -13,18 +13,19 @@ import { firstValueFrom } from 'rxjs';
 export class DeleteEmployeePopupComponent {
   constructor(
     private dialogRef: MatDialogRef<DeleteEmployeePopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: number },
+    @Inject(MAT_DIALOG_DATA) public EmployeeModel: EmployeeModel,
     private router: Router,
     private httpService: HttpService
   ) { }
 
-  EmployeeModel: EmployeeModel[] = [];
+
+
 
 
 
   async deleteEmployee() {
     try {
-      const data = await firstValueFrom(this.httpService.deleteEmployeeByID(this.data.id));
+      const data = await firstValueFrom(this.httpService.deleteEmployeeByID(this.EmployeeModel.id!));
       this.dialogRef.close(true);
       this.router.navigate(['/main-employee-view']);
 
@@ -33,10 +34,7 @@ export class DeleteEmployeePopupComponent {
     }
   }
 
-  ngOnInit(): void {
-    // Initialize the component, for example, fetch data from a service
-    console.log('MainEmployeeViewComponent initialized');
-  }
+
 
   closeDialog() {
     this.dialogRef.close(false);
@@ -47,20 +45,4 @@ export class DeleteEmployeePopupComponent {
     this.router.navigate(['/main-employee-view'])
   }
 }
-  /*openDialog(){
-    this.dialogRef.open(DeleteEmployeePopupComponent)
-  }
-
-  navigateMainView() {
-    this.router.navigate(['/update-employee-view'])
-  }
-
-  deleteEmployee() {
-    this.router.navigate(['/main-employee-view'])
-  }
-
-}
-function inject(MAT_DIALOG_DATA: InjectionToken<any>): (target: typeof DeleteEmployeePopupComponent, propertyKey: undefined, parameterIndex: 1) => void {
-  throw new Error('Function not implemented.');
-}*/
 

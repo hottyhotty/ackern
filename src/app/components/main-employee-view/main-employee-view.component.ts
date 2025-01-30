@@ -28,7 +28,11 @@ export class MainEmployeeViewComponent implements OnInit {
     this.router.navigate(['/create-employee-view'])
   }
 
-  NavigationEmployeeDetails(employee: EmployeeModel) {
-    this.router.navigate(['/update-employee-view', employee])
+  async NavigationEmployeeDetails(employeeID: number | undefined) {
+    if (employeeID === undefined) return;
+    this.httpService.getEmployeeByID(employeeID).subscribe((employee) => {
+      this.router.navigate(['/update-employee-view', employee])
+
+    })
   }
 }

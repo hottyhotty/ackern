@@ -23,13 +23,19 @@ export class UpdateEmployeeViewComponent implements OnInit {
     phone: '',
     skillSet: []
   };
+  isReadOnly: boolean | undefined;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpService: HttpService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.isReadOnly = true;
     this.route.params.subscribe(params => {
       this.employee = { ...params } as EmployeeModel;
     });
+  }
+
+  changeReadOnly() {
+  if (this.isReadOnly) this.isReadOnly = false;
   }
 
   async navigateUpdateEmployee() {
@@ -37,7 +43,7 @@ export class UpdateEmployeeViewComponent implements OnInit {
       this.employee.skillSet= []
       const data = await firstValueFrom(this.httpService.updateEmployee(this.employee));
       console.log('Employee updated: ', data);
-      alert('Employee Updated successfully!');
+      alert('Employee Updated successfully!',);
     } catch (error) {
       console.log('Error while updating Employee: ', error);
       alert('Employed Error while updating Employee!');
@@ -53,8 +59,11 @@ export class UpdateEmployeeViewComponent implements OnInit {
   }
 
   NavigationDeleteEmployee() {
+
     const dialogRef = this.dialog.open(DeleteEmployeePopupComponent, {
-      data: { id: this.employee.id }
+      data: this.employee,
+      width: '500px',
+      height: '300px'
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
@@ -99,7 +108,11 @@ export class UpdateEmployeeViewComponent implements OnInit {
   }
 
   async onSubmit(employeeForm: NgForm) {
-    if (this.validateEmployee()) {
+    if (this.isReadOnly) {
+      this.changeReadOnly()
+      return;
+    }
+    if (this.validateEmployee() && this.isReadOnly == false) {
       console.log('Formular ist gültig', this.employee);
       await this.NavigationAfterUpdate();
     } else {

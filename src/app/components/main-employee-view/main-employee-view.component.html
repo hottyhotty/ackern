@@ -19,7 +19,7 @@
       </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let employee of EmployeeModel;" (click)="NavigationEmployeeDetails(employee)">
+          <tr *ngFor="let employee of EmployeeModel;" (click)="NavigationEmployeeDetails(employee.id)">
             <td>{{employee.firstName}}</td>
             <td>{{employee.lastName}}</td>
             <td>{{employee.city}}</td>
