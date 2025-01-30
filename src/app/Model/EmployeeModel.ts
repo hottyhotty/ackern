@@ -4,7 +4,7 @@ export interface Skill {
 }
 
 export interface EmployeeModel {
-  id: number
+  id?: number
   lastName: string
   firstName: string
   street: string

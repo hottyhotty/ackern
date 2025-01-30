@@ -8,28 +8,24 @@ import { HttpService } from "../../Service/http.service";
   templateUrl: './main-employee-view.component.html',
   styleUrls: ['./main-employee-view.component.css']
 })
-  
+
 export class MainEmployeeViewComponent implements OnInit {
   EmployeeModel: EmployeeModel[] = [];
 
-  loadEmployee() {
-    this.httpService.getAllEmployees().subscribe((data) => {
-      this.EmployeeModel = data;
-    });
-  }
-
   constructor(private router: Router, private httpService: HttpService) { }
   ngOnInit(): void {
-    // Initialize the component, for example, fetch data from a service
     this.loadEmployee();
     console.log('MainEmployeeViewComponent initialized');
   }
 
-  trackById(index: number, item: EmployeeModel): number {
+    loadEmployee() {
+    if(this.EmployeeModel == null){
+      alert('Keine Mitarbeiter gefunden)');
+    } else{
+      this.httpService.getAllEmployees().subscribe((data) => {
+      this.EmployeeModel = data;
+    });}}
 
-    return item.id;
-
-  }
 
   NavigationCreateEmployee() {
     this.router.navigate(['/create-employee-view'])
