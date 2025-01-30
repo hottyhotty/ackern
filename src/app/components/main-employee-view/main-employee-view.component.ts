@@ -19,10 +19,13 @@ export class MainEmployeeViewComponent implements OnInit {
   }
 
     loadEmployee() {
-    this.httpService.getAllEmployees().subscribe((data) => {
+    if(this.EmployeeModel == null){
+      alert('Keine Mitarbeiter gefunden)');
+    } else{
+      this.httpService.getAllEmployees().subscribe((data) => {
       this.EmployeeModel = data;
-    });
-  }
+    });}}
+
 
   NavigationCreateEmployee() {
     this.router.navigate(['/create-employee-view'])

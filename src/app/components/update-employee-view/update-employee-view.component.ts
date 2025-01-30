@@ -5,6 +5,7 @@ import {firstValueFrom} from "rxjs";
 import {DeleteEmployeePopupComponent} from "../delete-employee-popup/delete-employee-popup.component";
 import {HttpService} from "../../Service/http.service";
 import {MatDialog} from "@angular/material/dialog";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-update-employee-view',
@@ -63,5 +64,49 @@ export class UpdateEmployeeViewComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  validateEmployee(): boolean {
+    const { firstName, lastName, street, postcode, city, phone } = this.employee;
+
+    if (!firstName || !lastName || !street || !postcode || !city || !phone) {
+      alert('Alle Felder müssen ausgefüllt sein.');
+      return false;
+    }
+    const nameRegex = /^[A-Za-zäöüßÄÖÜ]+$/;
+    if (!nameRegex.test(firstName)) {
+      alert('Der Vorname darf nur Buchstaben enthalten.');
+      return false;
+    }
+    if (!nameRegex.test(lastName)) {
+      alert('Der Nachname darf nur Buchstaben enthalten.');
+      return false;
+    }
+    const postcodeRegex = /^\d{5}$/;
+    if (!postcodeRegex.test(postcode)) {
+      alert('Die Postleitzahl muss genau 5 Zahlen enthalten.');
+      return false;
+    }
+    if (!nameRegex.test(city)) {
+      alert('Die Stadt darf nur Buchstaben enthalten.');
+      return false;
+    }
+    const phoneRegex = /^\d+$/;
+    if (!phoneRegex.test(phone)) {
+      alert('Die Telefonnummer darf nur Zahlen enthalten.');
+      return false;
+    }
+    return true;
+  }
+
+  async onSubmit(employeeForm: NgForm) {
+    if (this.validateEmployee()) {
+      console.log('Formular ist gültig', this.employee);
+      await this.NavigationAfterUpdate();
+    } else {
+      console.log('Formular ist ungültig');
+    }
+  }
+
+
 }
 
