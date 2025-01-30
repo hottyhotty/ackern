@@ -75,9 +75,9 @@ export class CreateEmployeeViewComponent implements OnInit {
       alert('Die Stadt darf nur Buchstaben enthalten.');
       return false;
     }
-    const phoneRegex = /^\d+$/;
+    const phoneRegex = /^[0-9+\/]+$/;
     if (!phoneRegex.test(phone)) {
-      alert('Die Telefonnummer darf nur Zahlen enthalten.');
+      alert('Die Telefonnummer darf nur Zahlen, '+'+'+'oder / enthalten.');
       return false;
     }
     return true;

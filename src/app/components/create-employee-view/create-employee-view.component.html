@@ -29,7 +29,7 @@
     </div>
     <div class="mb-3">
       <label for="phonenumber" class="form-label">Telefonnummer</label>
-      <input type="text" class="form-control" id="phonenumber" [(ngModel)]="newEmployee.phone" name="phone" placeholder="Bitte geben Sie die Telefonnummer ein" required pattern="\d+">
+      <input type="text" class="form-control" id="phonenumber" [(ngModel)]="newEmployee.phone" name="phone" placeholder="Bitte geben Sie die Telefonnummer ein" required pattern="[0-9+/]+">
     </div>
     <button type="button" class="btn btn-secondary btn-lg button-space" (click)="NavigationBack()">Abbrechen</button>
     <button type="submit" class="btn btn-secondary btn-lg" [disabled]="!employeeForm.form.valid">Speichern</button>
