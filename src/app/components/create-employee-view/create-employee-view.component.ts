@@ -12,13 +12,10 @@ export class CreateEmployeeViewComponent implements OnInit {
   constructor(private router: Router, private httpService: HttpService) { }
 
   ngOnInit(): void {
-    // Initialize the component, for example, fetch data from a service
-    this.generateNewId();
     console.log('MainEmployeeViewComponent initialized');
   }
 
   newEmployee: EmployeeModel = {
-    id: 0,
     lastName: '',
     firstName: '',
     street: '',
@@ -26,14 +23,6 @@ export class CreateEmployeeViewComponent implements OnInit {
     city: '',
     phone: '',
     skillSet: []
-  }
-
-  generateNewId() {
-      this.httpService.getAllEmployees().subscribe((employees) => {
-      const ids = employees.map(employee => employee.id);
-      const maxId = Math.max(...ids);
-      this.newEmployee.id = maxId + 1;
-    });
   }
 
 

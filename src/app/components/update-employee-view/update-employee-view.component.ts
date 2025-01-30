@@ -40,16 +40,6 @@ export class UpdateEmployeeViewComponent implements OnInit {
     }
   }
 
-  async SaveEmployee() {
-    try {
-      const data = await firstValueFrom(this.httpService.createEmployee(this.employee));
-      console.log('Employee saved: ', data);
-      this.router.navigate(['/main-employee-view']);
-    } catch (error) {
-      console.log('Error while saving Employee: ', error);
-    }
-  }
-
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.employee = { ...params } as EmployeeModel;

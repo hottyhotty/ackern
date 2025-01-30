@@ -8,7 +8,7 @@ import { HttpService } from "../../Service/http.service";
   templateUrl: './main-employee-view.component.html',
   styleUrls: ['./main-employee-view.component.css']
 })
-  
+
 export class MainEmployeeViewComponent implements OnInit {
   EmployeeModel: EmployeeModel[] = [];
 
@@ -25,11 +25,6 @@ export class MainEmployeeViewComponent implements OnInit {
     console.log('MainEmployeeViewComponent initialized');
   }
 
-  trackById(index: number, item: EmployeeModel): number {
-
-    return item.id;
-
-  }
 
   NavigationCreateEmployee() {
     this.router.navigate(['/create-employee-view'])
