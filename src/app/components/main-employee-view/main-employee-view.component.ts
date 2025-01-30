@@ -19,12 +19,9 @@ export class MainEmployeeViewComponent implements OnInit {
   }
 
     loadEmployee() {
-    if(this.EmployeeModel == null){
-      alert('Keine Mitarbeiter gefunden)');
-    } else{
       this.httpService.getAllEmployees().subscribe((data) => {
       this.EmployeeModel = data;
-    });}}
+    });}
 
 
   NavigationCreateEmployee() {
