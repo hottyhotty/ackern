@@ -21,7 +21,7 @@
   </div>
   <div class="mb-3">
     <label for="postcode" class="form-label">Postleitzahl</label>
-    <input type="text" class="form-control" id="postcode" [(ngModel)]="employee.postcode" name="postcode" required>
+    <input type="text" class="form-control" id="postcode" [(ngModel)]="employee.postcode" name="postcode" required pattern="\d{5}">
   </div>
   <div class="mb-3">
     <label for="city" class="form-label">Stadt</label>
@@ -29,7 +29,7 @@
   </div>
   <div class="mb-3">
     <label for="phone" class="form-label">Telefonnummer</label>
-    <input type="text" class="form-control" id="phone" [(ngModel)]="employee.phone" name="phone" required>
+    <input type="text" class="form-control" id="phone" [(ngModel)]="employee.phone" name="phone" required pattern="[0-9+/]+">
   </div>
   <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationBack()">Abbrechen</button>
   <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationDeleteEmployee()">Löschen</button>
