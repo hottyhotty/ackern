@@ -14,7 +14,6 @@ import {MatDialog} from "@angular/material/dialog";
 export class UpdateEmployeeViewComponent implements OnInit {
 
   employee: EmployeeModel = {
-    id: 0,
     lastName: '',
     firstName: '',
     street: '',
@@ -26,24 +25,26 @@ export class UpdateEmployeeViewComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private httpService: HttpService, private dialog: MatDialog) { }
 
-
-  async navigateUpdateEmployee() {
-    try {
-
-      this.employee.skillSet= []
-      var abc=  this.employee.id
-      const data = await firstValueFrom(this.httpService.updateEmployee(this.employee));
-      console.log('Employee updated: ', data);
-      this.router.navigate(['/main-employee-view']);
-    } catch (error) {
-      console.log('Error while updating Employee: ', error);
-    }
-  }
-
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.employee = { ...params } as EmployeeModel;
     });
+  }
+
+  async navigateUpdateEmployee() {
+    try {
+      this.employee.skillSet= []
+      const data = await firstValueFrom(this.httpService.updateEmployee(this.employee));
+      console.log('Employee updated: ', data);
+      alert('Employee Updated successfully!');
+    } catch (error) {
+      console.log('Error while updating Employee: ', error);
+      alert('Employed Error while updating Employee!');
+    }
+  }
+  async NavigationAfterUpdate() {
+    await this.navigateUpdateEmployee()
+    this.router.navigate(['/main-employee-view'],{ replaceUrl: true })
   }
 
   NavigationBack() {

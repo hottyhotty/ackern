@@ -26,7 +26,7 @@ export class CreateEmployeeViewComponent implements OnInit {
   }
 
 
-  SaveEmployee() {
+  async SaveEmployee() {
     this.httpService.createEmployee(this.newEmployee).subscribe({
       next: (data) => {
         console.log('Employee saved: ', data);
@@ -34,7 +34,7 @@ export class CreateEmployeeViewComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error saving employee: ', error);
-        alert('Error saving employee: ' + error.message); // Fehlermeldung
+        alert('Error saving employee: Employee schon vorhanden oder falsche Eingabe ' + error.message); // Fehlermeldung
       }
     });
   }
@@ -44,9 +44,9 @@ export class CreateEmployeeViewComponent implements OnInit {
     this.router.navigate(['/main-employee-view'])
   }
 
-  NavigationForward() {
-    this.SaveEmployee();
-    this.router.navigate(['/main-employee-view'])
-  }
+  async NavigationForward() {
+    await this.SaveEmployee();
+    await this.router.navigate(['/main-employee-view'], { replaceUrl: true })
+}
 
 }
