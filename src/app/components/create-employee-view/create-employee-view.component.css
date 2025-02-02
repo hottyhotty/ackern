@@ -18,3 +18,7 @@ h1{
 .is-invalid {
   border-color: red;
 }
+
+.invalid-feedback {
+  color: red;
+}
