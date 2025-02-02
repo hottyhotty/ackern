@@ -19,21 +19,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let s of editShow; trackBy: trackById" (click)="NavigationEmployeeDetails(s)">
-        <td>{{ s.firstName }}</td>
-        <td>{{ s.lastName }}</td>
-        <td>{{ s.city }}</td>
-      </tr>
-
+          <tr *ngFor="let employee of EmployeeModel;" (click)="NavigationEmployeeDetails(employee.id)">
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.city}}</td>
+          </tr>
       </tbody>
     </table>
   </div>
   <button class="fab" (click)="NavigationCreateEmployee()">+</button>
-
-
 </div>
-
-
-
 </body>
 </html>

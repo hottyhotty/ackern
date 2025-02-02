@@ -11,3 +11,10 @@ h1{
   text-align: center;
   margin-top:40px;
 }
+.is-invalid {
+  border-color: red;
+}
+
+.invalid-feedback {
+  color: red;
+}
