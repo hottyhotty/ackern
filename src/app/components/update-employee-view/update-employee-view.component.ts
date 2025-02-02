@@ -6,6 +6,7 @@ import {DeleteEmployeePopupComponent} from "../delete-employee-popup/delete-empl
 import {HttpService} from "../../Service/http.service";
 import {MatDialog} from "@angular/material/dialog";
 import {NgForm} from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-update-employee-view',
@@ -40,19 +41,30 @@ export class UpdateEmployeeViewComponent implements OnInit {
 
   async navigateUpdateEmployee() {
     try {
-      this.employee.skillSet= []
-      const data = await firstValueFrom(this.httpService.updateEmployee(this.employee));
-      console.log('Employee updated: ', data);
-      alert('Employee Updated successfully!',);
-    } catch (error) {
-      console.log('Error while updating Employee: ', error);
-      alert('Employed Error while updating Employee!');
+      this.employee.skillSet = [];
+      await firstValueFrom(this.httpService.updateEmployee(this.employee));
+
+      Swal.fire({
+        title: 'Aktualisiert!',
+        text: 'Der Mitarbeiter wurde erfolgreich aktualisiert.',
+        icon: 'success'
+      }).then(() => {
+        this.router.navigate(['/main-employee-view']).then(() => {
+          window.location.reload();
+        });
+      });
+
+    } catch (error: any) {
+      console.error('Error while updating Employee: ', error);
+
+      Swal.fire({
+        title: 'Fehlgeschlagen!',
+        text: 'Der Mitarbeiter konnte nicht aktualisiert werden: ' + (error.message || error),
+        icon: 'error',
+      });
     }
   }
-  async NavigationAfterUpdate() {
-    await this.navigateUpdateEmployee()
-    this.router.navigate(['/main-employee-view'],{ replaceUrl: true })
-  }
+
 
   NavigationBack() {
     this.router.navigate(['/main-employee-view'])
@@ -114,7 +126,7 @@ export class UpdateEmployeeViewComponent implements OnInit {
     }
     if (this.validateEmployee() && this.isReadOnly == false) {
       console.log('Formular ist gültig', this.employee);
-      await this.NavigationAfterUpdate();
+      await this.navigateUpdateEmployee();
     } else {
       console.log('Formular ist ungültig');
     }

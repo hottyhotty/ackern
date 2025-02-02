@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { EmployeeModel } from "../../Model/EmployeeModel";
 import { HttpService } from "../../Service/http.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-main-employee-view',
@@ -18,10 +19,23 @@ export class MainEmployeeViewComponent implements OnInit {
     console.log('MainEmployeeViewComponent initialized');
   }
 
-    loadEmployee() {
-      this.httpService.getAllEmployees().subscribe((data) => {
-      this.EmployeeModel = data;
-    });}
+  loadEmployee() {
+    if (this.EmployeeModel.length === 0) {
+      this.httpService.getAllEmployees().subscribe({
+        next: (data) => {
+          this.EmployeeModel = data;
+        },
+        error: (error) => {
+          console.error('Fehler beim Laden der Mitarbeiter:', error);
+          Swal.fire({
+            title: 'Fehlgeschlagen!',
+            text: 'Die Mitarbeiter konnten nicht geladen werden: ' + (error.message || error),
+            icon: 'error',
+          });
+        }
+      });
+    }
+  }
 
 
   NavigationCreateEmployee() {

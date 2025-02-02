@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { HttpService } from "../../Service/http.service";
 import { EmployeeModel } from '../../Model/EmployeeModel';
 import {NgForm} from "@angular/forms";
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-create-employee-view',
@@ -27,15 +29,27 @@ export class CreateEmployeeViewComponent implements OnInit {
   }
 
 
-  async SaveEmployee() {
+  SaveEmployee() {
     this.httpService.createEmployee(this.newEmployee).subscribe({
       next: (data) => {
         console.log('Employee saved: ', data);
-        alert('Employee saved successfully!'); // Erfolgsmeldung
+        Swal.fire({
+          title: 'Erfolgreich!',
+          text: 'Der Mitarbeiter wurde gespeichert',
+          icon: 'success',
+        }).then(() => {
+          this.router.navigate(['/main-employee-view']).then(() => {
+            window.location.reload();
+          });
+        });
       },
       error: (error) => {
         console.error('Error saving employee: ', error);
-        alert('Error:' + error.message); // Fehlermeldung
+        Swal.fire({
+          title: 'Fehlgeschlagen!',
+          text: 'Der Mitarbeiter konnte nicht gespeichert werden: '+ error.Message,
+          icon: 'error',
+        })
       }
     });
   }
@@ -44,11 +58,6 @@ export class CreateEmployeeViewComponent implements OnInit {
   NavigationBack() {
     this.router.navigate(['/main-employee-view'])
   }
-
-  async NavigationForward() {
-    await this.SaveEmployee();
-    await this.router.navigate(['/main-employee-view'], { replaceUrl: true })
-}
 
   validateEmployee(): boolean {
     const { firstName, lastName, street, postcode, city, phone } = this.newEmployee;
@@ -86,7 +95,7 @@ export class CreateEmployeeViewComponent implements OnInit {
   onSubmit(employeeForm: NgForm) {
     if (this.validateEmployee()) {
       console.log('Formular ist gültig', this.newEmployee);
-      this.NavigationForward();
+      this.SaveEmployee();
     } else {
       console.log('Formular ist ungültig');
     }

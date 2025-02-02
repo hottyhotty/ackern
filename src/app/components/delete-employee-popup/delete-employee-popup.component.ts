@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpService } from "../../Service/http.service";
 import { EmployeeModel } from "../../Model/EmployeeModel";
 import { firstValueFrom } from 'rxjs';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-delete-employee-popup',
@@ -25,24 +26,32 @@ export class DeleteEmployeePopupComponent {
 
   async deleteEmployee() {
     try {
-      const data = await firstValueFrom(this.httpService.deleteEmployeeByID(this.EmployeeModel.id!));
-      this.dialogRef.close(true);
-      this.router.navigate(['/main-employee-view']);
+      await firstValueFrom(this.httpService.deleteEmployeeByID(this.EmployeeModel.id!));
 
-    } catch (error) {
-      console.log('Error while deleting Employee: ', error);
+      Swal.fire({
+        title: 'Gelöscht!',
+        text: 'Der Mitarbeiter wurde erfolgreich gelöscht.',
+        icon: 'success'
+      }).then(() => {
+        this.router.navigate(['/main-employee-view']).then(() => {
+          window.location.reload();
+        });
+      });
+
+    } catch (error: any) {
+      console.error('Error while deleting Employee: ', error);
+
+      Swal.fire({
+        title: 'Fehlgeschlagen!',
+        text: 'Der Mitarbeiter konnte nicht gelöscht werden: ' + (error.message || error),
+        icon: 'error',
+      });
     }
   }
 
 
-
   closeDialog() {
     this.dialogRef.close(false);
-  }
-
-  NavigationForward() {
-    this.deleteEmployee();
-    this.router.navigate(['/main-employee-view'])
   }
 }
 
