@@ -7,34 +7,83 @@
 <h1>Mitarbeiter bearbeiten</h1>
 <div class="Window">
   <form (ngSubmit)="onSubmit(employeeForm)" #employeeForm="ngForm">
+
     <div class="mb-3">
       <label for="firstName" class="form-label">Vorname</label>
-      <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName" [readonly]="isReadOnly" required>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName" [readonly]="isReadOnly" required
+             [ngClass]="{
+                 'is-invalid': employeeForm.controls.firstName?.invalid && (employeeForm.controls.firstName?.touched || employeeForm.submitted),
+                 'form-control': true
+               }">
+      <div *ngIf="employeeForm.controls.firstName?.invalid && (employeeForm.controls.firstName?.touched || employeeForm.submitted)" class="invalid-feedback">
+        Bitte geben Sie einen gültigen Vornamen ein.
+      </div>
     </div>
-  <div class="mb-3">
-    <label for="lastName" class="form-label">Nachname</label>
-    <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName"  [readonly]="isReadOnly" required>
-  </div>
-  <div class="mb-3">
-    <label for="street" class="form-label">Straße</label>
-    <input type="text" class="form-control" id="street" [(ngModel)]="employee.street" name="street" [readonly]="isReadOnly" required>
-  </div>
-  <div class="mb-3">
-    <label for="postcode" class="form-label">Postleitzahl</label>
-    <input type="text" class="form-control" id="postcode" [(ngModel)]="employee.postcode" name="postcode" [readonly]="isReadOnly" required pattern="\d{5}">
-  </div>
-  <div class="mb-3">
-    <label for="city" class="form-label">Stadt</label>
-    <input type="text" class="form-control" id="city" [(ngModel)]="employee.city" name="city" [readonly]="isReadOnly" required>
-  </div>
-  <div class="mb-3">
-    <label for="phone" class="form-label">Telefonnummer</label>
-    <input type="text" class="form-control" id="phone" [(ngModel)]="employee.phone" name="phone" [readonly]="isReadOnly" required pattern="[0-9+/]+">
-  </div>
-  <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationBack()">Abbrechen</button>
-  <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationDeleteEmployee()">Löschen</button>
-  <button type="submit" class="btn btn-secondary btn-lg" [disabled]="!employeeForm.form.valid">{{isReadOnly ? 'Bearbeiten' : 'Speichern' }}</button>
-</form>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Nachname</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName" [readonly]="isReadOnly" required
+             [ngClass]="{
+                 'is-invalid': employeeForm.controls.lastName?.invalid && (employeeForm.controls.lastName?.touched || employeeForm.submitted),
+                 'form-control': true
+               }">
+      <div *ngIf="employeeForm.controls.lastName?.invalid && (employeeForm.controls.lastName?.touched || employeeForm.submitted)" class="invalid-feedback">
+        Bitte geben Sie einen gültigen Nachnamen ein.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="street" class="form-label">Straße</label>
+      <input type="text" class="form-control" id="street" [(ngModel)]="employee.street" name="street" [readonly]="isReadOnly" required
+             [ngClass]="{
+                 'is-invalid': employeeForm.controls.street?.invalid && (employeeForm.controls.street?.touched || employeeForm.submitted),
+                 'form-control': true
+               }">
+      <div *ngIf="employeeForm.controls.street?.invalid && (employeeForm.controls.street?.touched || employeeForm.submitted)" class="invalid-feedback">
+        Bitte geben Sie eine gültige Straße ein.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="postcode" class="form-label">Postleitzahl</label>
+      <input type="text" class="form-control" id="postcode" [(ngModel)]="employee.postcode" name="postcode" [readonly]="isReadOnly" required pattern="\d{5}"
+             [ngClass]="{
+                 'is-invalid': employeeForm.controls.postcode?.invalid && (employeeForm.controls.postcode?.touched || employeeForm.submitted),
+                 'form-control': true
+               }">
+      <div *ngIf="employeeForm.controls.postcode?.invalid && (employeeForm.controls.postcode?.touched || employeeForm.submitted)" class="invalid-feedback">
+        Die Postleitzahl muss genau 5 Zahlen enthalten.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="city" class="form-label">Stadt</label>
+      <input type="text" class="form-control" id="city" [(ngModel)]="employee.city" name="city" [readonly]="isReadOnly" required
+             [ngClass]="{
+                 'is-invalid': employeeForm.controls.city?.invalid && (employeeForm.controls.city?.touched || employeeForm.submitted),
+                 'form-control': true
+               }">
+      <div *ngIf="employeeForm.controls.city?.invalid && (employeeForm.controls.city?.touched || employeeForm.submitted)" class="invalid-feedback">
+        Bitte geben Sie eine gültige Stadt ein.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Telefonnummer</label>
+      <input type="text" class="form-control" id="phone" [(ngModel)]="employee.phone" name="phone" [readonly]="isReadOnly" required pattern="[0-9+/]+"
+             [ngClass]="{
+                 'is-invalid': employeeForm.controls.phone?.invalid && (employeeForm.controls.phone?.touched || employeeForm.submitted),
+                 'form-control': true
+               }">
+      <div *ngIf="employeeForm.controls.phone?.invalid && (employeeForm.controls.phone?.touched || employeeForm.submitted)" class="invalid-feedback">
+        Bitte geben Sie eine gültige Telefonnummer ein (nur Zahlen, + oder /).
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationBack()">Abbrechen</button>
+    <button type="button" class="btn btn-secondary btn-lg button-spacing" (click)="NavigationDeleteEmployee()">Löschen</button>
+    <button type="submit" class="btn btn-secondary btn-lg" [disabled]="!employeeForm.form.valid">{{isReadOnly ? 'Bearbeiten' : 'Speichern'}}</button>
+  </form>
 </div>
 </body>
 </html>

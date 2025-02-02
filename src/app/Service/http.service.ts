@@ -51,7 +51,7 @@ export class HttpService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.error('An error occurred:', error); // Logge den Fehler
+    console.error('An error occurred:', error);
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error.message}`;
